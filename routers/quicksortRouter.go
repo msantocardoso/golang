@@ -4,9 +4,12 @@ import(
 	"fmt"
 	"os"
 	"net/http"
+	"time"
 	"strconv"
+	"math/rand"
 	"github.com/gorilla/mux"
 	"github.com/msantocardoso/golang/sort"
+	"github.com/msantocardoso/golang/util"
 )
 
 func QuicksortRouter(w http.ResponseWriter, r *http.Request){
@@ -19,7 +22,31 @@ func QuicksortRouter(w http.ResponseWriter, r *http.Request){
         fmt.Println(err)
         os.Exit(2)
     }
-	lista := sort.Quicksort(tamanho)
 
-	fmt.Fprintln(w,"{lista:",lista,"}")
+	var lista []int = make([]int, tamanho)
+	
+	util.Cronometrar("gerarLista",func() {
+		lista = gerarLista(tamanho)
+	})
+
+	var ordenada []int = make([]int, len(lista))
+	
+	util.Cronometrar("quicksort",func() {
+		ordenada=sort.Quicksort(lista)
+	})
+
+	fmt.Fprintln(w,"{lista:",ordenada,"}")
+}
+
+func gerarLista(tamanho int) []int {
+	rand.Seed(time.Now().UnixNano())
+
+	itens := make([]int, tamanho)
+
+	i := 1
+	for ; i<tamanho; i++ {
+		itens[i] = rand.Intn(tamanho)
+	}
+
+	return itens	
 }
