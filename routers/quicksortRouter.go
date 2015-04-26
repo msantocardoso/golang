@@ -18,9 +18,9 @@ func QuicksortRouter(w http.ResponseWriter, r *http.Request){
 
 	tamanho,err := strconv.Atoi(params["tamanhoLista"])
  	if err != nil {
-        // handle error
-        fmt.Println(err)
-        os.Exit(2)
+    	// handle error
+		fmt.Println(err)
+		os.Exit(2)
     }
 
 	var lista []int = make([]int, tamanho)
@@ -43,8 +43,7 @@ func gerarLista(tamanho int) []int {
 
 	itens := make([]int, tamanho)
 
-	i := 1
-	for ; i<tamanho; i++ {
+	for i := 1; i<tamanho; i++ {
 		itens[i] = rand.Intn(tamanho)
 	}
 
