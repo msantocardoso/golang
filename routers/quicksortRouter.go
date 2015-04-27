@@ -24,7 +24,7 @@ func QuicksortRouter(w http.ResponseWriter, r *http.Request){
 	}
 
 	var lista []int = make([]int, tamanho)
-	
+
 	util.Cronometrar("gerarLista",func() {
 		lista = gerarLista(tamanho)
 	})
