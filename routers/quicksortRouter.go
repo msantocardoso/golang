@@ -17,11 +17,11 @@ func QuicksortRouter(w http.ResponseWriter, r *http.Request){
 	params := mux.Vars(r)
 
 	tamanho,err := strconv.Atoi(params["tamanhoLista"])
- 	if err != nil {
-    	// handle error
+	if err != nil {
+		// handle error
 		fmt.Println(err)
 		os.Exit(2)
-    }
+	}
 
 	var lista []int = make([]int, tamanho)
 	
